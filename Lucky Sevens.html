@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script>
+    function getbalance() {
+      var txt
+      var BalanceCheck = prompt("How many dollars do you have to bet?");
+      if (BalanceCheck == null || BalanceCheck ==="" || BalanceCheck <= "0" || isNaN(BalanceCheck)) {
+          function error() {
+            alert("You do not have enough money to play");
+          }error()
+      } else {
+          alert("Hello! Lets play Lucky Sevens");
+      }
+  }
+  </script>
+</head>
+<style>
+  body {
+    font-family: 'Gochi Hand', cursive;
+  }
+  h1 {
+    font-size: 5em;
+  }
+  label {
+    /* Other styling.. */
+    text-align: center;
+    clear: both;
+    float:left;
+    margin-right:15px;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: black .1em;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 6em;
+    margin-left:5.7em;
+}
+input {
+    font-size:6em;
+    margin-left:0;
+    border:.1em solid black;
+}
+input {
+     width: 280px
+}
+</style>
+<body>
+<!--Lucky Sevens
+  Starting Bet:-->
+  <div style="font-size:10em" class="col-md-offset-2 col-md-10">
+  Lucky Sevens
+  </div>
+  <div class="form-group">
+        <label for="inputInquiry" style = "font-size:6em;margin-left:3.3em;">Starting Bet:</label>
+      <input type="text" value="&dollar;" min="0" max="10000" oninput="getbalance()" step="1" name="Starting Bet" id="Starting_bet" />
+  </div>
+  <button class="button" for="Startgame">Play:</button>
+</body>
+</html>
