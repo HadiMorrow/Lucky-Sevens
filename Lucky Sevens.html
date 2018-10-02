@@ -80,85 +80,89 @@ input {
         alert("Hello! Lets play Lucky Sevens");
         document.getElementById('MoneyInput').value = "$" + CheckBal
     }
-    var repeat = 0;
+  var GameMoney = CheckBal;
+  var repeat = 0;
   function roll() {
-  var DiceRoll = 0;
-  GameMoney = CheckBal;
-  for(var i = 0; i < GameMoney; document.getElementById('MoneyInput').value){
+	var DiceRoll = 0;
+  for(var i = 0; i < GameMoney; GameMoney){
 		var x = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
 		var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
     DiceRoll = x + y;
     if (DiceRoll == 7){
       repeat = repeat + 1;
       GameMoney= GameMoney +4;
-      document.getElementById('PlayCount').value = repeat;
-      document.getElementById('MoneyInput').value = "$" + GameMoney;
-      roll();
+        document.getElementById('PlayCount').value = repeat;
+        document.getElementById('MoneyInput').value = "$" + GameMoney;
     }
     else {
       repeat = repeat + 1;
-      GameMoney= document.getElementById('MoneyInput').value -1;
+      GameMoney= GameMoney -1;
       document.getElementById('PlayCount').value = repeat;
       document.getElementById('MoneyInput').value = "$" + GameMoney;
-      roll();
+    }}}
+function generate_table() {
+  var TableText = [
+      ['Starting Bet',CheckBal],
+      ['Total Rolls Before Going Broke',repeat],
+      ['Highest Amount Won','+repeat+'],
+      ['Roll Count at Highest Amount Won',GameMoney]
+  ];
+  var tbl = document.createElement("h1");
+  // get the reference for the body
+  var body = document.getElementsByTagName("body")[0];
+
+  // creates a <table> element and a <tbody> element
+  var tbl = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+
+  // creating all cells
+  for (var i = 0; i < 4; i++) {
+    // creates a table row
+    var row = document.createElement("tr");
+
+    for (var j = 0; j < 2; j++) {
+      if (j==0) {
+      // Create a <td> element and a text node, make the text
+      // node the contents of the <td>, and put the <td> at
+      // the end of the table row
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(TableText[i][j]);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
     }
-	}
+    else {
+      // Create a <td> element and a text node, make the text
+      // node the contents of the <td>, and put the <td> at
+      // the end of the table row
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(TableText[i][j]);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+    }
+    }
+
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
+  }
+
+  // put the <tbody> in the <table>
+  tbl.appendChild(tblBody);
+  // appends <table> into <body>
+  body.appendChild(tbl);
+  // sets the border attribute of tbl to 2;
+  tbl.setAttribute("border", "2");
+}
+function GameOver() {
+    var h = document.createElement("H1");
+    var t = document.createTextNode("Game Over");
+    h.appendChild(t);
+    document.body.appendChild(h);
 }
 document.getElementById('Play').addEventListener('click',function(){
 roll();
-});
-}
+GameOver();
+generate_table();
+});}
 </script>
-
-
-
-<!--<script>
-
-  function roll() {
-  var repeat = repeat || 1;
-	var DiceRoll = 0;
-  for(var i = 0; i < repeat; i++){
-		var x = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
-		var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
-    DiceRoll = x + y;
-	}
-  document.getElementById('MoneyInput').value = DiceRoll;
-  if (DiceRoll != "7"){
-    roll();
-  }
-  else {
-
-  }
-}
-document.getElementById('Play').addEventListener('click',function(){
-roll();
-});
-</script>
--->
-
-
-
-
-
-
-
-<!--<script>
-  do {
-    function roll(GameMoney) {
-      {
- var DiceRoll = DiceRoll || 1;
- var Total = 0;
- for(var i = 0; i < repeat; i++)
-  var x = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
-  var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
-  DiceRoll = x + y;
-}
-document.getElementById('Roll').innerHTML = DiceRoll;
-}
-while(GameMoney >"3"){
-  roll(document.getElementById('MoneyInput').value = GameMoney;)
-}
-
-</script>-->
 </body>
 </html>
