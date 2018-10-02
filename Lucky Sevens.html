@@ -8,19 +8,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script>
-    function getbalance() {
-      var txt
-      var BalanceCheck = prompt("How many dollars do you have to bet?");
-      if (BalanceCheck == null || BalanceCheck ==="" || BalanceCheck <= "0" || isNaN(BalanceCheck)) {
-          function error() {
-            alert("You do not have enough money to play");
-          }error()
-      } else {
-          alert("Hello! Lets play Lucky Sevens");
-      }
-  }
-  </script>
 </head>
 <style>
   body {
@@ -58,13 +45,87 @@ input {
 <body>
 <!--Lucky Sevens
   Starting Bet:-->
+  <!--<script>
+    function getbalance() {
+      var txt
+      var BalanceCheck = prompt("How many dollars do you have to bet?");
+      if (BalanceCheck == null || BalanceCheck ==="" || BalanceCheck <= "0" || isNaN(BalanceCheck)) {
+          function error() {
+            alert("You do not have enough money to play");
+          }error()
+      } else {
+          alert("Hello! Lets play Lucky Sevens");
+      }
+  }
+  document.write(GameMoney)
+  </script>-->
   <div style="font-size:10em" class="col-md-offset-2 col-md-10">
   Lucky Sevens
   </div>
   <div class="form-group">
         <label for="inputInquiry" style = "font-size:6em;margin-left:3.3em;">Starting Bet:</label>
-      <input type="text" value="&dollar;" min="0" max="10000" oninput="getbalance()" step="1" name="Starting Bet" id="Starting_bet" />
-  </div>
-  <button class="button" for="Startgame">Play:</button>
+        <input id="iMoney" type="text" value="&dollar;" min="0" max="1000" oninput="PopCheck()" />
+
+
+
+
+  <script>
+  function PopCheck() {
+    var CheckBal = prompt("How many dollars do you have to bet?");
+    if (CheckBal == null || CheckBal ==="" || CheckBal <= "0" || isNaN(CheckBal)) {
+          alert("You do not have enough money to play");
+    } else {
+        alert("Hello! Lets play Lucky Sevens");
+        document.getElementById('iMoney').value = "$" + CheckBal
+    }
+}
+</script>
+</div>
+<button id="Play" onclick="Startgame" class="button" for="Startgame">Play:</button>
+<script>
+
+  while (document.getElementById('iMoney').value  != 7);{
+  function roll() {
+  var repeat = repeat || 1;
+  for(var i = 0; i < repeat; i++){
+		var x = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
+		var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
+    document.getElementById('iMoney').value  = x + y;
+	}
+
+}
+document.getElementById('Play').addEventListener('click',function(){
+roll();
+});
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+<!--<script>
+  do {
+    function roll(GameMoney) {
+      {
+ var DiceRoll = DiceRoll || 1;
+ var Total = 0;
+ for(var i = 0; i < repeat; i++)
+  var x = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
+  var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
+  DiceRoll = x + y;
+}
+document.getElementById('Roll').innerHTML = DiceRoll;
+}
+while(GameMoney >"3"){
+  roll(document.getElementById('iMoney').value = GameMoney;)
+}
+
+</script>-->
 </body>
 </html>
