@@ -64,35 +64,44 @@ input {
   </div>
   <div class="form-group">
         <label for="inputInquiry" style = "font-size:6em;margin-left:3.3em;">Starting Bet:</label>
-        <input id="iMoney" type="text" value="&dollar;" min="0" max="1000" oninput="PopCheck()" />
-
+        <input id="MoneyInput" type="text" value="&dollar;" min="0" max="1000" oninput="Game()" />
+      </div>
+      <button id="Play" onclick="Startgame" class="button" for="Startgame">Play:</button>
 
 
 
   <script>
-  function PopCheck() {
+  function Game() {
     var CheckBal = prompt("How many dollars do you have to bet?");
     if (CheckBal == null || CheckBal ==="" || CheckBal <= "0" || isNaN(CheckBal)) {
           alert("You do not have enough money to play");
     } else {
         alert("Hello! Lets play Lucky Sevens");
-        document.getElementById('iMoney').value = "$" + CheckBal
+        document.getElementById('MoneyInput').value = "$" + CheckBal
     }
-}
-</script>
-</div>
-<button id="Play" onclick="Startgame" class="button" for="Startgame">Play:</button>
-<script>
 
-  while (document.getElementById('iMoney').value  != 7);{
   function roll() {
   var repeat = repeat || 1;
+	var DiceRoll = 0;
+  GameMoney = CheckBal;
   for(var i = 0; i < repeat; i++){
 		var x = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
 		var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
-    document.getElementById('iMoney').value  = x + y;
+    DiceRoll = x + y;
+    if (DiceRoll != "7" && GameMoney > "1"){
+      roll();
+      GameMoney= parseInt(GameMoney) -1;
+      document.getElementById('MoneyInput').value = GameMoney;
+    }
+    else if (DiceRoll == "7" && GameMoney > "1") {
+      roll();
+      GameMoney= parseInt(GameMoney) +4;
+      document.getElementById('MoneyInput').value = GameMoney
+    }
+    else {
+      document.getElementById('MoneyInput').value = 0
+    }
 	}
-
 }
 document.getElementById('Play').addEventListener('click',function(){
 roll();
@@ -102,6 +111,29 @@ roll();
 
 
 
+<!--<script>
+
+  function roll() {
+  var repeat = repeat || 1;
+	var DiceRoll = 0;
+  for(var i = 0; i < repeat; i++){
+		var x = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
+		var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
+    DiceRoll = x + y;
+	}
+  document.getElementById('MoneyInput').value = DiceRoll;
+  if (DiceRoll != "7"){
+    roll();
+  }
+  else {
+
+  }
+}
+document.getElementById('Play').addEventListener('click',function(){
+roll();
+});
+</script>
+-->
 
 
 
@@ -123,7 +155,7 @@ roll();
 document.getElementById('Roll').innerHTML = DiceRoll;
 }
 while(GameMoney >"3"){
-  roll(document.getElementById('iMoney').value = GameMoney;)
+  roll(document.getElementById('MoneyInput').value = GameMoney;)
 }
 
 </script>-->
