@@ -65,6 +65,7 @@ input {
   <div class="form-group">
         <label for="inputInquiry" style = "font-size:6em;margin-left:3.3em;">Starting Bet:</label>
         <input id="MoneyInput" type="text" value="&dollar;" min="0" max="1000" oninput="Game()" />
+        <input id="PlayCount" type="text" value="" />
       </div>
       <button id="Play" onclick="Startgame" class="button" for="Startgame">Play:</button>
 
@@ -79,27 +80,27 @@ input {
         alert("Hello! Lets play Lucky Sevens");
         document.getElementById('MoneyInput').value = "$" + CheckBal
     }
-
+    var repeat = 0;
   function roll() {
-  var repeat = repeat || 1;
-	var DiceRoll = 0;
+  var DiceRoll = 0;
   GameMoney = CheckBal;
-  for(var i = 0; i < repeat; i++){
+  for(var i = 0; i < GameMoney; document.getElementById('MoneyInput').value){
 		var x = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
 		var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
     DiceRoll = x + y;
-    if (DiceRoll != "7" && GameMoney > "1"){
+    if (DiceRoll == 7){
+      repeat = repeat + 1;
+      GameMoney= GameMoney +4;
+      document.getElementById('PlayCount').value = repeat;
+      document.getElementById('MoneyInput').value = "$" + GameMoney;
       roll();
-      GameMoney= parseInt(GameMoney) -1;
-      document.getElementById('MoneyInput').value = GameMoney;
-    }
-    else if (DiceRoll == "7" && GameMoney > "1") {
-      roll();
-      GameMoney= parseInt(GameMoney) +4;
-      document.getElementById('MoneyInput').value = GameMoney
     }
     else {
-      document.getElementById('MoneyInput').value = 0
+      repeat = repeat + 1;
+      GameMoney= document.getElementById('MoneyInput').value -1;
+      document.getElementById('PlayCount').value = repeat;
+      document.getElementById('MoneyInput').value = "$" + GameMoney;
+      roll();
     }
 	}
 }
