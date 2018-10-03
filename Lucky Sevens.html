@@ -44,6 +44,20 @@ Email Address: Hadi.a.morrow@gmail.com
     font-size: 6em;
     margin-left:5.7em;
 }
+.button2 {
+    background-color: #4CAF50; /* Green */
+    border: black .1em;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 6em;
+    margin-left:1.7em;
+    margin-right: 4.8em;
+    margin-left: 3.3em;
+    margin-bottom: 1em;
+    margin-top: .5em;
+}
 input {
     font-size:6em;
     margin-left:0;
@@ -53,6 +67,7 @@ input {
 table {
   margin: 0px auto;
   font-size: 3em;
+  margin-bottom: 1em;
 }
 tr {
   text-align: center;
@@ -66,9 +81,9 @@ Face of the site
   <div style="font-size:10em" class="col-md-offset-2 col-md-10">
   Lucky Sevens
   </div>
-  <div class="form-group">
+  <div class="form-group ">
         <label for="inputInquiry" style = "font-size:6em;margin-left:3.3em;">Starting Bet:</label>
-        <input id="MoneyInput" type="text" value="&dollar;" min="0" max="1000" oninput="Game()" />
+        <input id="MoneyInput" type="text" value="&dollar;" oninput="Game()" />
       </div>
       <button id="Play" onclick="Startgame" class="button" for="Startgame">Play:</button>
       <!--
@@ -82,6 +97,7 @@ Face of the site
     var CheckBal = prompt("How many dollars do you have to bet?");
     if (CheckBal == null || CheckBal ==="" || CheckBal <= "0" || isNaN(CheckBal)) {
           alert("You do not have enough money to play");
+          CheckBal="Error";
     } else {
         alert("Hello! Lets play Lucky Sevens");
         document.getElementById('MoneyInput').value = "$" + CheckBal
@@ -93,6 +109,7 @@ Face of the site
   /*
   Roll function is the essential roll dice function of the game
   */
+  if (GameMoney !== "Error") {
   function roll() {
 	var DiceRoll = 0;
   for(var i = 0; i < GameMoney; GameMoney){
@@ -181,6 +198,7 @@ function GameOver() {
     var hr = document.createElement("hr");
     document.body.appendChild(hr);
 }
+
 /*
 Change function Changes the play button to play again after click
 */
@@ -192,6 +210,23 @@ function change()
       elem.innerHTML = "Play Again?";
     }
     else window.location.reload(false);
+}
+
+}
+else {
+/*
+Change function Changes the play button to play again after click
+*/
+function change()
+{
+    var elem = document.getElementById("Play");
+    if (elem.innerHTML=="Play:")
+    {
+      elem.className = "button2"
+      elem.innerHTML = "Error, you do not have enough money to play.";
+    }
+    else window.location.reload(false);
+}change()
 }
 /*
 At event click roll gameover generate_table and change all are activated in that order
