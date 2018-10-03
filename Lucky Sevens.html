@@ -15,6 +15,10 @@
   }
   h1 {
     font-size: 5em;
+    text-align: center;
+  }
+  hr {
+    border: 0.3em solid #000;
   }
   label {
     /* Other styling.. */
@@ -37,9 +41,14 @@ input {
     font-size:6em;
     margin-left:0;
     border:.1em solid black;
+    width: 280px
 }
-input {
-     width: 280px
+table {
+  margin: 0px auto;
+  font-size: 3em;
+}
+tr {
+  text-align: center;
 }
 </style>
 <body>
@@ -65,7 +74,6 @@ input {
   <div class="form-group">
         <label for="inputInquiry" style = "font-size:6em;margin-left:3.3em;">Starting Bet:</label>
         <input id="MoneyInput" type="text" value="&dollar;" min="0" max="1000" oninput="Game()" />
-        <input id="PlayCount" type="text" value="" />
       </div>
       <button id="Play" onclick="Startgame" class="button" for="Startgame">Play:</button>
 
@@ -82,6 +90,8 @@ input {
     }
   var GameMoney = CheckBal;
   var repeat = 0;
+  var arr = [];
+  var arrGM = [];
   function roll() {
 	var DiceRoll = 0;
   for(var i = 0; i < GameMoney; GameMoney){
@@ -89,24 +99,29 @@ input {
 		var y = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
     DiceRoll = x + y;
     if (DiceRoll == 7){
-      repeat = repeat + 1;
-      GameMoney= GameMoney +4;
-        document.getElementById('PlayCount').value = repeat;
-        document.getElementById('MoneyInput').value = "$" + GameMoney;
+      arrGM.push(GameMoney+4);
+      arr.push(++repeat);
     }
     else {
-      repeat = repeat + 1;
-      GameMoney= GameMoney -1;
-      document.getElementById('PlayCount').value = repeat;
-      document.getElementById('MoneyInput').value = "$" + GameMoney;
-    }}}
+      arrGM.push(--GameMoney);
+      arr.push(++repeat);
+    }
+    document.getElementById('MoneyInput').value = "$" + CheckBal;
+  }}
+
+  let i = arr.indexOf(Math.max(...arrGM));
+
 function generate_table() {
   var TableText = [
-      ['Starting Bet',CheckBal],
-      ['Total Rolls Before Going Broke',repeat],
-      ['Highest Amount Won','+repeat+'],
-      ['Roll Count at Highest Amount Won',GameMoney]
+      ['Starting Bet',"$" + CheckBal],
+      ['Total Rolls Before Going Broke',arr[arr.length-1]],
+      ['Highest Amount Won',"$" + arrGM[arrGM.indexOf(Math.max(...arrGM))]],
+      ['Roll Count at Highest Amount Won',(arrGM.indexOf(Math.max(...arrGM))+1)]
   ];
+  var h = document.createElement("H1");
+  var t = document.createTextNode("Results");
+  h.appendChild(t);
+  document.body.appendChild(h);
   var tbl = document.createElement("h1");
   // get the reference for the body
   var body = document.getElementsByTagName("body")[0];
@@ -157,12 +172,25 @@ function GameOver() {
     var t = document.createTextNode("Game Over");
     h.appendChild(t);
     document.body.appendChild(h);
+    var hr = document.createElement("hr");
+    document.body.appendChild(hr);
+}
+function change() // no ';' here
+{
+    var elem = document.getElementById("Play");
+    if (elem.innerHTML=="Play:")
+    {
+      elem.innerHTML = "Play Again?";
+    }
+    else window.location.reload(false);
 }
 document.getElementById('Play').addEventListener('click',function(){
 roll();
 GameOver();
 generate_table();
-});}
+change()
+});
+}
 </script>
 </body>
 </html>
