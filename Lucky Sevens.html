@@ -95,7 +95,7 @@ Face of the site
   */
   function Game() {
     var CheckBal = prompt("How many dollars do you have to bet?");
-    if (CheckBal == null || CheckBal ==="" || CheckBal <= "0" || isNaN(CheckBal)) {
+    if (CheckBal == null || CheckBal ==="" || CheckBal <= 0 || isNaN(CheckBal)) {
           alert("You do not have enough money to play");
           CheckBal="Error";
     } else {
@@ -211,7 +211,6 @@ function change()
     }
     else window.location.reload(false);
 }
-
 }
 else {
 /*
@@ -226,7 +225,7 @@ function change()
       elem.innerHTML = "Error, you do not have enough money to play.";
     }
     else window.location.reload(false);
-}change()
+}
 }
 /*
 At event click roll gameover generate_table and change all are activated in that order
