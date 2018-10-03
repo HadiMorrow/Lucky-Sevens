@@ -224,6 +224,7 @@ function change()
     {
       elem.className = "button2"
       elem.innerHTML = "Error, you do not have enough money to play.";
+      elem.addEventListener('click',function(){window.location.reload(false)});
     }
     else window.location.reload(false);
 }change()
