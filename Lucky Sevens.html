@@ -1,3 +1,8 @@
+<!-- Name: Hadi Morrow
+Date Created: 09/28/2018
+Most recent revision: 10/02/2018
+Email Address: Hadi.a.morrow@gmail.com
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +14,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
+<!-- Style
+-->
 <style>
   body {
     font-family: 'Gochi Hand', cursive;
@@ -52,22 +59,10 @@ tr {
 }
 </style>
 <body>
-<!--Lucky Sevens
-  Starting Bet:-->
-  <!--<script>
-    function getbalance() {
-      var txt
-      var BalanceCheck = prompt("How many dollars do you have to bet?");
-      if (BalanceCheck == null || BalanceCheck ==="" || BalanceCheck <= "0" || isNaN(BalanceCheck)) {
-          function error() {
-            alert("You do not have enough money to play");
-          }error()
-      } else {
-          alert("Hello! Lets play Lucky Sevens");
-      }
-  }
-  document.write(GameMoney)
-  </script>-->
+<!--
+Face of the site
+-->
+
   <div style="font-size:10em" class="col-md-offset-2 col-md-10">
   Lucky Sevens
   </div>
@@ -76,10 +71,13 @@ tr {
         <input id="MoneyInput" type="text" value="&dollar;" min="0" max="1000" oninput="Game()" />
       </div>
       <button id="Play" onclick="Startgame" class="button" for="Startgame">Play:</button>
-
-
-
+      <!--
+      Brains of the site where everything happens
+      -->
   <script>
+  /*
+  Game function
+  */
   function Game() {
     var CheckBal = prompt("How many dollars do you have to bet?");
     if (CheckBal == null || CheckBal ==="" || CheckBal <= "0" || isNaN(CheckBal)) {
@@ -92,6 +90,9 @@ tr {
   var repeat = 0;
   var arr = [];
   var arrGM = [];
+  /*
+  Roll function is the essential roll dice function of the game
+  */
   function roll() {
 	var DiceRoll = 0;
   for(var i = 0; i < GameMoney; GameMoney){
@@ -110,7 +111,9 @@ tr {
   }}
 
   let i = arr.indexOf(Math.max(...arrGM));
-
+  /*
+  Generate Table function
+  */
 function generate_table() {
   var TableText = [
       ['Starting Bet',"$" + CheckBal],
@@ -167,6 +170,9 @@ function generate_table() {
   // sets the border attribute of tbl to 2;
   tbl.setAttribute("border", "2");
 }
+/*
+Game Over function which prints game over from JavaScript to HTML
+*/
 function GameOver() {
     var h = document.createElement("H1");
     var t = document.createTextNode("Game Over");
@@ -175,7 +181,10 @@ function GameOver() {
     var hr = document.createElement("hr");
     document.body.appendChild(hr);
 }
-function change() // no ';' here
+/*
+Change function Changes the play button to play again after click
+*/
+function change()
 {
     var elem = document.getElementById("Play");
     if (elem.innerHTML=="Play:")
@@ -184,6 +193,9 @@ function change() // no ';' here
     }
     else window.location.reload(false);
 }
+/*
+At event click roll gameover generate_table and change all are activated in that order
+*/
 document.getElementById('Play').addEventListener('click',function(){
 roll();
 GameOver();
